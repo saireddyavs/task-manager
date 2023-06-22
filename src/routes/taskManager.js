@@ -5,6 +5,8 @@ const { check, validationResult } = require("express-validator");
 taskManagerRoutes.use(bodyParser.json());
 taskManagerRoutes.use(bodyParser.urlencoded({ extended: false }));
 
+var idCounter = 1;
+
 const tasks = [
   { title: "Title-1", description: "description-1", isComplete: false, id: 1 },
 ];
@@ -19,7 +21,6 @@ taskManagerRoutes.post(
   [
     check("title", "Title should be string").isString(),
     check("description", "Description should be string").isString(),
-    check("isComplete", "isComplete should be boolean").isBoolean(),
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -31,10 +32,17 @@ taskManagerRoutes.post(
       return;
     }
 
-    tasks.push(req.body);
+    tasks.push({ ...req.body, id: idCounter });
+    idCounter += 1;
     res.status(200);
     res.send(tasks);
   }
 );
+
+taskManagerRoutes.get("/:taskID", (req, res) => {
+  const task = tasks.find((t) => t.id == req.params.taskID);
+  res.status(200);
+  res.send(task);
+});
 
 module.exports = taskManagerRoutes;
