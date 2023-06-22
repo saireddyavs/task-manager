@@ -45,4 +45,11 @@ taskManagerRoutes.get("/:taskID", (req, res) => {
   res.send(task);
 });
 
+taskManagerRoutes.put("/:taskID", (req, res) => {
+  const taskIndex = tasks.findIndex((t) => t.id == req.params.taskID);
+  tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
+  res.status(200);
+  res.send(tasks);
+});
+
 module.exports = taskManagerRoutes;
