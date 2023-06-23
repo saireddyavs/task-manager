@@ -7,34 +7,23 @@ const {
   ERR_TASK_MANAGER_TASK_NOT_FOUND,
 } = require("./errorCodes");
 
+const newApiError = (errorCode, errorMessage) => {
+  return { errorCode: errorCode, errorMessage: errorMessage };
+};
+
 const handleValidationError = (errors) => {
   const errorResponses = errors?.errors?.map((error) => {
     console.log(error);
     if (error?.path == "description") {
-      return {
-        errorCode: ERR_TASK_MANAGER_INVALID_DESCRIPTION,
-        errorMessage: error?.msg,
-      };
+      return newApiError(ERR_TASK_MANAGER_INVALID_DESCRIPTION, error?.msg);
     } else if (error?.path == "title") {
-      return {
-        errorCode: ERR_TASK_MANAGER_INVALID_TITLE,
-        errorMessage: error?.msg,
-      };
+      return newApiError(ERR_TASK_MANAGER_INVALID_TITLE, error?.msg);
     } else if (error?.path == "isComplete") {
-      return {
-        errorCode: ERR_TASK_MANAGER_INVALID_IS_COMPLETION,
-        errorMessage: error?.msg,
-      };
+      return newApiError(ERR_TASK_MANAGER_INVALID_IS_COMPLETION, error?.msg);
     } else if (error?.path == "taskID") {
-      return {
-        errorCode: ERR_TASK_MANAGER_INVALID_TASK_ID,
-        errorMessage: error?.msg,
-      };
+      return newApiError(ERR_TASK_MANAGER_INVALID_TASK_ID, error?.msg);
     } else {
-      return {
-        errorCode: ERR_TASK_MANAGER_DEFAULT,
-        errorMessage: error?.msg,
-      };
+      return newApiError(ERR_TASK_MANAGER_DEFAULT, error?.msg);
     }
   });
 
@@ -47,9 +36,8 @@ const handleValidationError = (errors) => {
   return errorResponse;
 };
 
-const taskNotFound = {
-  errorCode: ERR_TASK_MANAGER_TASK_NOT_FOUND,
-  errorMessage: "TaskID passed in the request is not found",
-};
-
+const taskNotFound = newApiError(
+  ERR_TASK_MANAGER_TASK_NOT_FOUND,
+  "TaskID passed in the request is not found"
+);
 module.exports = { handleValidationError, taskNotFound };
