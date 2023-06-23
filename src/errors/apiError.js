@@ -3,10 +3,11 @@ const {
   ERR_TASK_MANAGER_INVALID_DESCRIPTION,
   ERR_TASK_MANAGER_INVALID_IS_COMPLETION,
   ERR_TASK_MANAGER_DEFAULT,
+  ERR_TASK_MANAGER_INVALID_TASK_ID,
 } = require("./errorCodes");
 
 const handleValidationError = (errors) => {
-  const errorResponse = errors?.errors?.map((error) => {
+  const errorResponses = errors?.errors?.map((error) => {
     console.log(error);
     if (error?.path == "description") {
       return {
@@ -18,9 +19,14 @@ const handleValidationError = (errors) => {
         errorCode: ERR_TASK_MANAGER_INVALID_TITLE,
         errorMessage: error?.msg,
       };
-    } else if (error?.path == "isCompletion") {
+    } else if (error?.path == "isComplete") {
       return {
         errorCode: ERR_TASK_MANAGER_INVALID_IS_COMPLETION,
+        errorMessage: error?.msg,
+      };
+    } else if (error?.path == "taskID") {
+      return {
+        errorCode: ERR_TASK_MANAGER_INVALID_TASK_ID,
         errorMessage: error?.msg,
       };
     } else {
@@ -30,6 +36,12 @@ const handleValidationError = (errors) => {
       };
     }
   });
+
+  const errorResponse = {
+    errorCount: errorResponses.length,
+    description: "Please pass valid request,Go through the examples",
+    errors: errorResponses,
+  };
 
   return errorResponse;
 };

@@ -1,26 +1,37 @@
 const { check, param } = require("express-validator");
 
-const titleValidation = check("title", "Title should be string")
+const titleValidation = check(
+  "title",
+  "Title should be string. Example:'Project Work"
+)
   .notEmpty()
   .isString();
 
 const descriptionValidation = check(
   "description",
-  "Description should be string"
+  "Description should be string. Example:'Complete Project Work by 10:00PM'"
 )
   .notEmpty()
   .isString();
 
 const isCompleteValidation = check(
   "isComplete",
-  "isComplete should be boolean"
-).isBoolean();
+  "isComplete should be boolean. Example: true/false"
+)
+  .isBoolean()
+  .optional();
 
 const taskIDValidation = param(
   "taskID",
-  "taskID should be a valid positive number"
+  "taskID should be a valid positive number. Example:123"
 ).isNumeric();
 
 const createTaskValidation = [titleValidation, descriptionValidation];
 
-module.exports = { createTaskValidation, taskIDValidation };
+const updateTaskValidation = [taskIDValidation, isCompleteValidation];
+
+module.exports = {
+  createTaskValidation,
+  taskIDValidation,
+  updateTaskValidation,
+};

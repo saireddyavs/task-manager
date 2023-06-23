@@ -11,6 +11,7 @@ const {
 const {
   createTaskValidation,
   taskIDValidation,
+  updateTaskValidation,
 } = require("../validator/taskManager");
 
 taskManagerRoutes.use(bodyParser.json());
@@ -22,7 +23,7 @@ taskManagerRoutes.post("/", createTaskValidation, createTask);
 
 taskManagerRoutes.get("/:taskID", taskIDValidation, getTask);
 
-taskManagerRoutes.put("/:taskID", taskIDValidation, updateTask);
+taskManagerRoutes.put("/:taskID", updateTaskValidation, updateTask);
 
 taskManagerRoutes.delete("/:taskID", taskIDValidation, deleteTask);
 
