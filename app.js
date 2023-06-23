@@ -8,7 +8,7 @@ const app = express();
 const PORT = 3000;
 
 // https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express
-app.use(cors({ origin: "*", methods: ["POST", "GET"] }));
+app.use(cors({ origin: "*", methods: ["POST", "GET", "PUT", "DELETE"] }));
 
 app.use(routes);
 

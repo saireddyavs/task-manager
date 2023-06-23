@@ -8,26 +8,14 @@ const {
   deleteTask,
   updateTask,
 } = require("../controller/taskManager");
+const { createTaskValidation } = require("../validator/taskManager");
 
 taskManagerRoutes.use(bodyParser.json());
 taskManagerRoutes.use(bodyParser.urlencoded({ extended: false }));
 
-var idCounter = 1;
-
-const tasks = [
-  { title: "Title-1", description: "description-1", isComplete: false, id: 1 },
-];
-
 taskManagerRoutes.get("/", getTasks);
 
-taskManagerRoutes.post(
-  "/",
-  [
-    check("title", "Title should be string").isString(),
-    check("description", "Description should be string").isString(),
-  ],
-  createTask
-);
+taskManagerRoutes.post("/", createTaskValidation, createTask);
 
 taskManagerRoutes.get("/:taskID", getTask);
 
