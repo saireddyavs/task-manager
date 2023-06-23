@@ -52,4 +52,11 @@ taskManagerRoutes.put("/:taskID", (req, res) => {
   res.send(tasks);
 });
 
+taskManagerRoutes.delete("/:taskID", (req, res) => {
+  const taskIndex = tasks.findIndex((t) => t.id == req.params.taskID);
+  tasks.splice(taskIndex, 1);
+  res.status(200);
+  res.send(tasks);
+});
+
 module.exports = taskManagerRoutes;
