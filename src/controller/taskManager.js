@@ -1,5 +1,5 @@
 const { validationResult } = require("express-validator");
-const { handleValidationError } = require("../errors/apiError");
+const { handleValidationError, taskNotFound } = require("../errors/apiError");
 
 var idCounter = 1;
 
@@ -36,6 +36,11 @@ const getTask = (req, res) => {
   const isValidationSuccess = processRequestValidation(req, res);
   if (!isValidationSuccess) return;
   const task = tasks.find((t) => t.id == req.params.taskID);
+  if (!task) {
+    res.status(404);
+    res.send(taskNotFound);
+    return;
+  }
   res.status(200);
   res.send(task);
 };
@@ -44,6 +49,11 @@ const updateTask = (req, res) => {
   const isValidationSuccess = processRequestValidation(req, res);
   if (!isValidationSuccess) return;
   const taskIndex = tasks.findIndex((t) => t.id == req.params.taskID);
+  if (taskIndex == -1) {
+    res.status(404);
+    res.send(taskNotFound);
+    return;
+  }
   tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
   res.status(200);
   res.send(tasks);
@@ -53,6 +63,11 @@ const deleteTask = (req, res) => {
   const isValidationSuccess = processRequestValidation(req, res);
   if (!isValidationSuccess) return;
   const taskIndex = tasks.findIndex((t) => t.id == req.params.taskID);
+  if (taskIndex == -1) {
+    res.status(404);
+    res.send(taskNotFound);
+    return;
+  }
   tasks.splice(taskIndex, 1);
   res.status(200);
   res.send(tasks);

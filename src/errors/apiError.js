@@ -4,6 +4,7 @@ const {
   ERR_TASK_MANAGER_INVALID_IS_COMPLETION,
   ERR_TASK_MANAGER_DEFAULT,
   ERR_TASK_MANAGER_INVALID_TASK_ID,
+  ERR_TASK_MANAGER_TASK_NOT_FOUND,
 } = require("./errorCodes");
 
 const handleValidationError = (errors) => {
@@ -46,4 +47,9 @@ const handleValidationError = (errors) => {
   return errorResponse;
 };
 
-module.exports = { handleValidationError };
+const taskNotFound = {
+  errorCode: ERR_TASK_MANAGER_TASK_NOT_FOUND,
+  errorMessage: "TaskID passed in the request is not found",
+};
+
+module.exports = { handleValidationError, taskNotFound };
