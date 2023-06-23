@@ -1,4 +1,5 @@
 const { validationResult } = require("express-validator");
+const { handleValidationError } = require("../errors/apiError");
 
 var idCounter = 1;
 
@@ -15,9 +16,8 @@ const createTask = (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.json(errors);
+    res.json(handleValidationError(errors));
     res.status(400);
-    console.log(errors);
     return;
   }
 
