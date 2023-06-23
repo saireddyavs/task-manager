@@ -4,8 +4,18 @@ const { handleValidationError } = require("../errors/apiError");
 var idCounter = 1;
 
 const tasks = [
-  { title: "Title-1", description: "description-1", isComplete: false, id: 1 },
+  // { title: "Title-1", description: "description-1", isComplete: false, id: 1 },
 ];
+
+const processRequestValidation = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.json(handleValidationError(errors));
+    res.status(400);
+    return false;
+  }
+  return true;
+};
 
 const getTasks = (req, res) => {
   res.status(200);
@@ -13,13 +23,8 @@ const getTasks = (req, res) => {
 };
 
 const createTask = (req, res) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    res.json(handleValidationError(errors));
-    res.status(400);
-    return;
-  }
+  const isValidationSuccess = processRequestValidation(req, res);
+  if (!isValidationSuccess) return;
 
   tasks.push({ ...req.body, id: idCounter });
   idCounter += 1;
@@ -28,12 +33,16 @@ const createTask = (req, res) => {
 };
 
 const getTask = (req, res) => {
+  const isValidationSuccess = processRequestValidation(req, res);
+  if (!isValidationSuccess) return;
   const task = tasks.find((t) => t.id == req.params.taskID);
   res.status(200);
   res.send(task);
 };
 
 const updateTask = (req, res) => {
+  const isValidationSuccess = processRequestValidation(req, res);
+  if (!isValidationSuccess) return;
   const taskIndex = tasks.findIndex((t) => t.id == req.params.taskID);
   tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
   res.status(200);
@@ -41,6 +50,8 @@ const updateTask = (req, res) => {
 };
 
 const deleteTask = (req, res) => {
+  const isValidationSuccess = processRequestValidation(req, res);
+  if (!isValidationSuccess) return;
   const taskIndex = tasks.findIndex((t) => t.id == req.params.taskID);
   tasks.splice(taskIndex, 1);
   res.status(200);

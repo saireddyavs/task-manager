@@ -8,7 +8,10 @@ const {
   deleteTask,
   updateTask,
 } = require("../controller/taskManager");
-const { createTaskValidation } = require("../validator/taskManager");
+const {
+  createTaskValidation,
+  taskIDValidation,
+} = require("../validator/taskManager");
 
 taskManagerRoutes.use(bodyParser.json());
 taskManagerRoutes.use(bodyParser.urlencoded({ extended: false }));
@@ -17,10 +20,10 @@ taskManagerRoutes.get("/", getTasks);
 
 taskManagerRoutes.post("/", createTaskValidation, createTask);
 
-taskManagerRoutes.get("/:taskID", getTask);
+taskManagerRoutes.get("/:taskID", taskIDValidation, getTask);
 
-taskManagerRoutes.put("/:taskID", updateTask);
+taskManagerRoutes.put("/:taskID", taskIDValidation, updateTask);
 
-taskManagerRoutes.delete("/:taskID", deleteTask);
+taskManagerRoutes.delete("/:taskID", taskIDValidation, deleteTask);
 
 module.exports = taskManagerRoutes;
