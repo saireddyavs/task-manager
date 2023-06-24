@@ -4,21 +4,25 @@ const titleValidation = check(
   'title',
   'Title should be string. Example:Project Work'
 )
-  .exists()
-  .withMessage('Title is not passed in the request')
   .notEmpty()
   .withMessage('Title Should not be empty')
   .isString();
+
+const titleValidationRequired = titleValidation
+  .exists()
+  .withMessage('Title is not passed in the request');
 
 const descriptionValidation = check(
   'description',
   'Description should be string. Example:Complete Project Work by 10:00PM'
 )
-  .exists()
-  .withMessage('Description is not passed in the request')
   .notEmpty()
   .withMessage('Description Should not be empty')
   .isString();
+
+const descriptionValidationRequired = descriptionValidation
+  .exists()
+  .withMessage('Description is not passed in the request');
 
 const isCompleteValidation = check(
   'isComplete',
@@ -32,9 +36,17 @@ const taskIDValidation = param(
   'taskID should be a valid positive number. Example:123'
 ).isNumeric();
 
-const createTaskValidation = [titleValidation, descriptionValidation];
+const createTaskValidation = [
+  titleValidationRequired,
+  descriptionValidationRequired,
+];
 
-const updateTaskValidation = [taskIDValidation, isCompleteValidation];
+const updateTaskValidation = [
+  taskIDValidation,
+  isCompleteValidation,
+  titleValidation.optional(),
+  descriptionValidation.optional(),
+];
 
 module.exports = {
   createTaskValidation,

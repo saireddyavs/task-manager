@@ -23,7 +23,7 @@ const createNewTask = ({ description, title }) => {
 const getTaskByID = ({ taskID }) => {
   const task = tasks.find((t) => t.id === Number(taskID));
   if (!task) {
-    return { statusCode: 404, taskNotFound };
+    return { statusCode: 404, response: taskNotFound };
   }
   return {
     statusCode: 200,
@@ -34,7 +34,7 @@ const getTaskByID = ({ taskID }) => {
 const updateTaskById = ({ description, title, isComplete, taskID }) => {
   const taskIndex = tasks.findIndex((t) => t.id === Number(taskID));
   if (taskIndex === -1) {
-    return { statusCode: 404, taskNotFound };
+    return { statusCode: 404, response: taskNotFound };
   }
   const prevTask = tasks[taskIndex];
   const updatedDescription = description || prevTask.description;
@@ -56,7 +56,7 @@ const updateTaskById = ({ description, title, isComplete, taskID }) => {
 const deleteTaskByID = ({ taskID }) => {
   const taskIndex = tasks.findIndex((t) => t.id === Number(taskID));
   if (taskIndex === -1) {
-    return { statusCode: 404, taskNotFound };
+    return { statusCode: 404, response: taskNotFound };
   }
   tasks.splice(taskIndex, 1);
   return {
