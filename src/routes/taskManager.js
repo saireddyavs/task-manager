@@ -6,11 +6,13 @@ const {
   getTask,
   deleteTask,
   updateTask,
+  getTasksForPriorityLevel,
 } = require('../controller/taskManager');
 const {
   createTaskValidation,
   taskIDValidation,
   updateTaskValidation,
+  priorityLevelValidationForParam,
 } = require('../validator/taskManager');
 
 taskManagerRoutes.use(bodyParser.json());
@@ -25,5 +27,11 @@ taskManagerRoutes.get('/:taskID', taskIDValidation, getTask);
 taskManagerRoutes.put('/:taskID', updateTaskValidation, updateTask);
 
 taskManagerRoutes.delete('/:taskID', taskIDValidation, deleteTask);
+
+taskManagerRoutes.get(
+  '/priority/:level',
+  priorityLevelValidationForParam,
+  getTasksForPriorityLevel
+);
 
 module.exports = taskManagerRoutes;

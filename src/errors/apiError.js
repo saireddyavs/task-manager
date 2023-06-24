@@ -5,6 +5,7 @@ const {
   ERR_TASK_MANAGER_DEFAULT,
   ERR_TASK_MANAGER_INVALID_TASK_ID,
   ERR_TASK_MANAGER_TASK_NOT_FOUND,
+  ERR_TASK_MANAGER_INVALID_PRIORITY,
 } = require('./errorCodes');
 
 const newApiError = (errorCode, errorMessage) => ({ errorCode, errorMessage });
@@ -22,6 +23,9 @@ const handleValidationError = (errors) => {
     }
     if (error?.path === 'taskID') {
       return newApiError(ERR_TASK_MANAGER_INVALID_TASK_ID, error?.msg);
+    }
+    if (error?.path === 'priority' || error?.path === 'level') {
+      return newApiError(ERR_TASK_MANAGER_INVALID_PRIORITY, error?.msg);
     }
     return newApiError(ERR_TASK_MANAGER_DEFAULT, error?.msg);
   });

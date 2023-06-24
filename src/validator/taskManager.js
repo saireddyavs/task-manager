@@ -1,4 +1,9 @@
 const { check, param } = require('express-validator');
+const {
+  PRIORITY_LOW,
+  PRIORITY_HIGH,
+  PRIORITY_MEDIUM,
+} = require('../constants/priority');
 
 const titleValidation = check(
   'title',
@@ -27,14 +32,26 @@ const descriptionValidationRequired = descriptionValidation
 const isCompleteValidation = check(
   'isComplete',
   'isComplete should be boolean. Example: true/false'
-)
-  .isBoolean()
-  .optional();
+).isBoolean();
 
 const taskIDValidation = param(
   'taskID',
   'taskID should be a valid positive number. Example:123'
 ).isNumeric();
+
+const priorityLevelValidation = check(
+  'priority',
+  'Priority should be string. Example:low/medium/high'
+)
+  .isString()
+  .isIn([PRIORITY_LOW, PRIORITY_HIGH, PRIORITY_MEDIUM]);
+
+const priorityLevelValidationForParam = param(
+  'level',
+  'Priority should be string. Example:low/medium/high'
+)
+  .isString()
+  .isIn([PRIORITY_LOW, PRIORITY_HIGH, PRIORITY_MEDIUM]);
 
 const createTaskValidation = [
   titleValidationRequired,
@@ -43,13 +60,15 @@ const createTaskValidation = [
 
 const updateTaskValidation = [
   taskIDValidation,
-  isCompleteValidation,
+  isCompleteValidation.optional(),
   titleValidation.optional(),
   descriptionValidation.optional(),
+  priorityLevelValidation.optional(),
 ];
 
 module.exports = {
   createTaskValidation,
   taskIDValidation,
   updateTaskValidation,
+  priorityLevelValidationForParam,
 };

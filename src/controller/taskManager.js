@@ -6,6 +6,7 @@ const {
   getTaskByID,
   updateTaskById,
   deleteTaskByID,
+  getTasksForLevel,
 } = require('../service/taskManager');
 
 const processRequestValidation = (req, res) => {
@@ -47,13 +48,14 @@ const updateTask = (req, res) => {
   const isValidationSuccess = processRequestValidation(req, res);
   if (!isValidationSuccess) return;
 
-  const { description, title, isComplete } = req.body;
+  const { description, title, isComplete, priority } = req.body;
   const { taskID } = req.params;
   const { statusCode, response } = updateTaskById({
     description,
     title,
     isComplete,
     taskID,
+    priority,
   });
   res.status(statusCode);
   res.send(response);
@@ -68,10 +70,20 @@ const deleteTask = (req, res) => {
   res.send(response);
 };
 
+const getTasksForPriorityLevel = (req, res) => {
+  const isValidationSuccess = processRequestValidation(req, res);
+  if (!isValidationSuccess) return;
+  const { level } = req.params;
+  const { statusCode, response } = getTasksForLevel({ level });
+  res.status(statusCode);
+  res.send(response);
+};
+
 module.exports = {
   getTasks,
   createTask,
   getTask,
   updateTask,
   deleteTask,
+  getTasksForPriorityLevel,
 };

@@ -1,4 +1,5 @@
 const { taskNotFound } = require('../errors/apiError');
+const { PRIORITY_LOW } = require('../constants/priority');
 
 let idCounter = 1;
 
@@ -12,6 +13,7 @@ const createNewTask = ({ description, title }) => {
     title,
     isComplete: false,
     id: idCounter,
+    priority: PRIORITY_LOW,
   });
   idCounter += 1;
   return {
@@ -31,7 +33,13 @@ const getTaskByID = ({ taskID }) => {
   };
 };
 
-const updateTaskById = ({ description, title, isComplete, taskID }) => {
+const updateTaskById = ({
+  description,
+  title,
+  isComplete,
+  taskID,
+  priority,
+}) => {
   const taskIndex = tasks.findIndex((t) => t.id === Number(taskID));
   if (taskIndex === -1) {
     return { statusCode: 404, response: taskNotFound };
@@ -40,11 +48,13 @@ const updateTaskById = ({ description, title, isComplete, taskID }) => {
   const updatedDescription = description || prevTask.description;
   const updatedTitle = title || prevTask.title;
   const updatedIscomplete = isComplete || prevTask.isComplete;
+  const updatedPriority = priority || prevTask.priority;
   const updateTask = {
     ...prevTask,
     description: updatedDescription,
     title: updatedTitle,
     isComplete: updatedIscomplete,
+    priority: updatedPriority,
   };
   tasks[taskIndex] = updateTask;
   return {
@@ -64,10 +74,24 @@ const deleteTaskByID = ({ taskID }) => {
     response: { message: 'Task deleted successfully.' },
   };
 };
+
+const getTasksForLevel = ({ level }) => {
+  const tasksForPriorityLevel = tasks.filter((task) => task.priority === level);
+  if (tasksForPriorityLevel.length === 0) {
+    return {
+      statusCode: 404,
+      response: {
+        message: `There are currently no tasks with priority level:${level}`,
+      },
+    };
+  }
+  return { statusCode: 200, response: { tasks: tasksForPriorityLevel } };
+};
 module.exports = {
   getAllTasks,
   createNewTask,
   getTaskByID,
   updateTaskById,
   deleteTaskByID,
+  getTasksForLevel,
 };

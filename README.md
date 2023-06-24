@@ -47,6 +47,7 @@ Please refer to attached postaman collection for getting clear view of handled f
 
    - Validates if description is required, not empty and is string.
    - Validates if title is required, not empty and is string.
+   - If there are more than one request validation errors, all errors are passed in one response as array
    - creates a new task with title,descriptiom,id and isComplete flag set to false
 
 3. **GET /tasks/:taskID**
@@ -55,6 +56,7 @@ Please refer to attached postaman collection for getting clear view of handled f
 
    - Validates if taskID passed is valid number
    - Validates if taskID is present among the list of tasks
+   - If there are more than one request validation errors, all errors are passed in one response as array
    - Return the taskDetails of task if taskID is valid and present.
 
 4. **PUT /tasks/:taskID**
@@ -63,6 +65,11 @@ Please refer to attached postaman collection for getting clear view of handled f
 
    - Validates if taskID passed is valid number
    - Validates if taskID is present among the list of tasks
+   - Validates if optional description passed and not empty and is string
+   - Validates if optional title passed and not empty and is string
+   - Validates if optional isComplete passed and is boolean
+   - Validates if optional priority is passesd and is string and one among['low','medium','high']
+   - If there are more than one request validation errors, all errors are passed in one response as array
    - Updates the task information if taskID passed is valid and present
 
 5. **DELETE /tasks/:taskID**
@@ -71,7 +78,16 @@ Please refer to attached postaman collection for getting clear view of handled f
 
    - Validates if taskID passed is valid number
    - Validates if taskID is present among the list of tasks
+   - If there are more than one request validation errors, all errors are passed in one response as array
    - Deletes the task if taskID passed is valid and present
+
+6. **GET /tasks/priority/:level**
+
+   Retrive all the tasks with the given priority level
+
+   - Validates if the priority level passed in the request is valid or not
+   - If there are more than one request validation errors, all errors are passed in one response as array
+   - Pass all tasks with same priority based on request param in the response
 
 ## References:
 
