@@ -20,7 +20,12 @@ const processRequestValidation = (req, res) => {
 };
 
 const getTasks = (req, res) => {
-  const { statusCode, response } = getAllTasks();
+  const { filterBy, sortBy, filterValue } = req.query;
+  const { statusCode, response } = getAllTasks({
+    filterBy,
+    sortBy,
+    filterValue,
+  });
   res.status(statusCode);
   res.send(response);
 };
@@ -38,6 +43,7 @@ const createTask = (req, res) => {
 const getTask = (req, res) => {
   const isValidationSuccess = processRequestValidation(req, res);
   if (!isValidationSuccess) return;
+
   const { taskID } = req.params;
   const { statusCode, response } = getTaskByID({ taskID });
   res.status(statusCode);

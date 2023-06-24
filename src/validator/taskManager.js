@@ -1,4 +1,4 @@
-const { check, param } = require('express-validator');
+const { check, param, query } = require('express-validator');
 const {
   PRIORITY_LOW,
   PRIORITY_HIGH,
@@ -53,6 +53,17 @@ const priorityLevelValidationForParam = param(
   .isString()
   .isIn([PRIORITY_LOW, PRIORITY_HIGH, PRIORITY_MEDIUM]);
 
+const filterByValidation = query(
+  'filterBy',
+  'Please pass valid key name to filterBy'
+)
+  .isString()
+  .isIn(['title', 'description', 'id', 'createdAt', 'updatedAt', 'priority']);
+
+const sortByValidation = query('sortBy', 'Please pass valid key name to sortBy')
+  .isString()
+  .isIn(['title', 'description', 'id', 'createdAt', 'updatedAt', 'priority']);
+
 const createTaskValidation = [
   titleValidationRequired,
   descriptionValidationRequired,
@@ -66,9 +77,15 @@ const updateTaskValidation = [
   priorityLevelValidation.optional(),
 ];
 
+const getTasksValidation = [
+  filterByValidation.optional(),
+  sortByValidation.optional(),
+];
+
 module.exports = {
   createTaskValidation,
   taskIDValidation,
   updateTaskValidation,
   priorityLevelValidationForParam,
+  getTasksValidation,
 };

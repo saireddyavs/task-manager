@@ -1,11 +1,24 @@
 const { taskNotFound } = require('../errors/apiError');
 const { PRIORITY_LOW } = require('../constants/priority');
+const _ = require('lodash');
 
 let idCounter = 1;
 
 const tasks = [];
 
-const getAllTasks = () => ({ statusCode: 200, response: tasks });
+const getAllTasks = ({ filterBy, sortBy, filterValue }) => {
+  let updatedTasks = tasks;
+  if (filterBy) {
+    updatedTasks = tasks.filter((task) => task[filterBy] === filterValue);
+  }
+  if (sortBy) {
+    updatedTasks = _.sortBy(updatedTasks, sortBy);
+  }
+  if (updatedTasks.length === 0) {
+    return { statusCode: 404, response: { message: 'There are no tasks' } };
+  }
+  return { statusCode: 200, response: updatedTasks };
+};
 
 const createNewTask = ({ description, title }) => {
   tasks.push({
@@ -14,6 +27,8 @@ const createNewTask = ({ description, title }) => {
     isComplete: false,
     id: idCounter,
     priority: PRIORITY_LOW,
+    createdAt: new Date(),
+    updatedAt: new Date(),
   });
   idCounter += 1;
   return {
@@ -55,6 +70,7 @@ const updateTaskById = ({
     title: updatedTitle,
     isComplete: updatedIscomplete,
     priority: updatedPriority,
+    updatedAt: new Date(),
   };
   tasks[taskIndex] = updateTask;
   return {

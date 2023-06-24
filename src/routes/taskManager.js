@@ -12,13 +12,14 @@ const {
   createTaskValidation,
   taskIDValidation,
   updateTaskValidation,
+  getTasksValidation,
   priorityLevelValidationForParam,
 } = require('../validator/taskManager');
 
 taskManagerRoutes.use(bodyParser.json());
 taskManagerRoutes.use(bodyParser.urlencoded({ extended: false }));
 
-taskManagerRoutes.get('/', getTasks);
+taskManagerRoutes.get('/', getTasksValidation, getTasks);
 
 taskManagerRoutes.post('/', createTaskValidation, createTask);
 
