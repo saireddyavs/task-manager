@@ -1,30 +1,29 @@
-const taskManagerRoutes = require("express").Router();
-const bodyParser = require("body-parser");
-const { check, validationResult } = require("express-validator");
+const taskManagerRoutes = require('express').Router();
+const bodyParser = require('body-parser');
 const {
   getTasks,
   createTask,
   getTask,
   deleteTask,
   updateTask,
-} = require("../controller/taskManager");
+} = require('../controller/taskManager');
 const {
   createTaskValidation,
   taskIDValidation,
   updateTaskValidation,
-} = require("../validator/taskManager");
+} = require('../validator/taskManager');
 
 taskManagerRoutes.use(bodyParser.json());
 taskManagerRoutes.use(bodyParser.urlencoded({ extended: false }));
 
-taskManagerRoutes.get("/", getTasks);
+taskManagerRoutes.get('/', getTasks);
 
-taskManagerRoutes.post("/", createTaskValidation, createTask);
+taskManagerRoutes.post('/', createTaskValidation, createTask);
 
-taskManagerRoutes.get("/:taskID", taskIDValidation, getTask);
+taskManagerRoutes.get('/:taskID', taskIDValidation, getTask);
 
-taskManagerRoutes.put("/:taskID", updateTaskValidation, updateTask);
+taskManagerRoutes.put('/:taskID', updateTaskValidation, updateTask);
 
-taskManagerRoutes.delete("/:taskID", taskIDValidation, deleteTask);
+taskManagerRoutes.delete('/:taskID', taskIDValidation, deleteTask);
 
 module.exports = taskManagerRoutes;
