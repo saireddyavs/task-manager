@@ -4,14 +4,20 @@ const titleValidation = check(
   "title",
   "Title should be string. Example:'Project Work"
 )
+  .exists()
+  .withMessage("Title is not passed in the request")
   .notEmpty()
+  .withMessage("Title Should not be empty")
   .isString();
 
 const descriptionValidation = check(
   "description",
   "Description should be string. Example:'Complete Project Work by 10:00PM'"
 )
+  .exists()
+  .withMessage("Description is not passed in the request")
   .notEmpty()
+  .withMessage("Description Should not be empty")
   .isString();
 
 const isCompleteValidation = check(

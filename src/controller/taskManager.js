@@ -26,10 +26,16 @@ const createTask = (req, res) => {
   const isValidationSuccess = processRequestValidation(req, res);
   if (!isValidationSuccess) return;
 
-  tasks.push({ ...req.body, id: idCounter });
+  const { description, title } = req.body;
+  tasks.push({
+    description: description,
+    title: title,
+    isComplete: false,
+    id: idCounter,
+  });
   idCounter += 1;
   res.status(200);
-  res.send(tasks);
+  res.send({ message: "Task added successfully." });
 };
 
 const getTask = (req, res) => {
@@ -54,9 +60,20 @@ const updateTask = (req, res) => {
     res.send(taskNotFound);
     return;
   }
-  tasks[taskIndex] = { ...tasks[taskIndex], ...req.body };
+  const { description, title, isComplete } = req.body;
+  const prevTask = tasks[taskIndex];
+  const updatedDescription = description || prevTask.description;
+  const updatedTitle = title || prevTask.title;
+  const updatedIscomplete = isComplete || prevTask.isComplete;
+  const updateTask = {
+    ...prevTask,
+    description: updatedDescription,
+    title: updatedTitle,
+    isComplete: updatedIscomplete,
+  };
+  tasks[taskIndex] = updateTask;
   res.status(200);
-  res.send(tasks);
+  res.send({ message: "Task updated successfully." });
 };
 
 const deleteTask = (req, res) => {
@@ -70,7 +87,7 @@ const deleteTask = (req, res) => {
   }
   tasks.splice(taskIndex, 1);
   res.status(200);
-  res.send(tasks);
+  res.send({ message: "Task deleted successfully." });
 };
 
 module.exports = { getTasks, createTask, getTask, updateTask, deleteTask };
