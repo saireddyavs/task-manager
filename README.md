@@ -39,7 +39,8 @@ Please refer to attached postaman collection for getting clear view of handled f
 
 1. **GET /tasks**
 
-   Get all the tasks created.
+   - Get all the tasks created.
+   - Filter tasks and sort tasks
 
 2. **POST /tasks**
 
