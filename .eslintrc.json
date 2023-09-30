@@ -1,3 +1,4 @@
+
 {
     "env": {
         "browser": true,
@@ -5,10 +6,11 @@
         "es2021": true,
         "node": true
     },
-    "extends": "airbnb-base",
+    "extends": ["airbnb-base","eslint-config.js"],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
-    "rules": {
+    "rules": { 
+        "comma-dangle": ["off"]
     }
 }

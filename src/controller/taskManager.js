@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const { handleValidationError } = require('../errors/apiError');
+const { handleValidationError } = require('@errors/apiError');
 const {
   getAllTasks,
   createNewTask,
@@ -7,7 +7,7 @@ const {
   updateTaskById,
   deleteTaskByID,
   getTasksForLevel,
-} = require('../service/taskManager');
+} = require('@service/taskManager');
 
 const processRequestValidation = (req, res) => {
   const errors = validationResult(req);
@@ -20,6 +20,8 @@ const processRequestValidation = (req, res) => {
 };
 
 const getTasks = (req, res) => {
+  const isValidationSuccess = processRequestValidation(req, res);
+  if (!isValidationSuccess) return;
   const { filterBy, sortBy, filterValue } = req.query;
   const { statusCode, response } = getAllTasks({
     filterBy,

@@ -7,14 +7,14 @@ const {
   deleteTask,
   updateTask,
   getTasksForPriorityLevel,
-} = require('../controller/taskManager');
+} = require('@controller/taskManager');
 const {
   createTaskValidation,
   taskIDValidation,
   updateTaskValidation,
   getTasksValidation,
   priorityLevelValidationForParam,
-} = require('../validator/taskManager');
+} = require('@validation/taskManager');
 
 taskManagerRoutes.use(bodyParser.json());
 taskManagerRoutes.use(bodyParser.urlencoded({ extended: false }));

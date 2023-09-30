@@ -3,7 +3,7 @@ const {
   PRIORITY_LOW,
   PRIORITY_HIGH,
   PRIORITY_MEDIUM,
-} = require('../constants/priority');
+} = require('@constants/priority');
 
 const titleValidation = check(
   'title',

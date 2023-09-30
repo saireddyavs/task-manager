@@ -1,10 +1,11 @@
+require('./aliases');
 const express = require('express');
 
 const routes = express.Router();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const taskManager = require('./src/routes/taskManager');
 const morgan = require('morgan');
+const taskManager = require('./src/routes/taskManager');
 
 const app = express();
 const PORT = 3000;
@@ -21,17 +22,21 @@ app.use(morgan('tiny'));
 
 app.use(routes);
 
-routes.use('/tasks', taskManager);
+routes.use('/v1/tasks/', taskManager);
 
 app.get('/', (req, res) => {
   res.status(200);
   res.send('Welcome to the Task Manager API');
 });
 
+app.use((req, res) => {
+  res.status(404).send('Not Found');
+});
+
 app.listen(PORT, (error) => {
-  if (!error)
+  if (!error) {
     console.log(
-      'Server is Successfully Running, and App is listening on port ' + PORT
+      `Server is Successfully Running, and App is listening on port ${PORT}`
     );
-  else console.log("Error occurred, server can't start", error);
+  } else console.log("Error occurred, server can't start", error);
 });

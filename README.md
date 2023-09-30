@@ -2,7 +2,7 @@
 
 ### About
 
-A simple manager api build using node and express. The API includes endpoints which can do CRUD operation.
+A minimalist task manager API developed using Node.js and Express. This API provides endpoints for seamless CRUD (Create, Read, Update, Delete) operations.
 
 ### Built using
 
@@ -35,70 +35,53 @@ You can access the api Endpoints at `localhost:3000`
 
 Please refer to attached postaman collection for getting clear view of handled flows and error cases.
 
-### List of available endpoints
+## Endpoints - Short Description
 
-1. **GET /tasks**
+| Method | Path                | Description                 |
+| ------ | ------------------- | --------------------------- |
+| GET    | /v1/tasks           | Get a list of all tasks     |
+| POST   | /v1/tasks           | Create a new task           |
+| GET    | /v1/tasks/:taskId   | Get a specific task by ID   |
+| PUT    | /v1/tasks/:taskId   | Update a task by ID         |
+| DELETE | /v1/tasks/:taskId   | Delete a task by ID         |
+| GET    | /v1/priority/:level | Get tasks by priority level |
 
-   - Get all the tasks created.
-   - Filter tasks and sort tasks
+## Endpoints - Long Description
 
-2. **POST /tasks**
-
-   create a new task with title and description.
-
-   - Validates if description is required, not empty and is string.
-   - Validates if title is required, not empty and is string.
-   - If there are more than one request validation errors, all errors are passed in one response as array
-   - creates a new task with title,descriptiom,id and isComplete flag set to false
-
-3. **GET /tasks/:taskID**
-
-   Get information related to task with specific taskID
-
-   - Validates if taskID passed is valid number
-   - Validates if taskID is present among the list of tasks
-   - If there are more than one request validation errors, all errors are passed in one response as array
-   - Return the taskDetails of task if taskID is valid and present.
-
-4. **PUT /tasks/:taskID**
-
-   Update Information realted to specific task with taskID
-
-   - Validates if taskID passed is valid number
-   - Validates if taskID is present among the list of tasks
-   - Validates if optional description passed and not empty and is string
-   - Validates if optional title passed and not empty and is string
-   - Validates if optional isComplete passed and is boolean
-   - Validates if optional priority is passesd and is string and one among['low','medium','high']
-   - If there are more than one request validation errors, all errors are passed in one response as array
-   - Updates the task information if taskID passed is valid and present
-
-5. **DELETE /tasks/:taskID**
-
-   Delete Information related to specific task with taskID
-
-   - Validates if taskID passed is valid number
-   - Validates if taskID is present among the list of tasks
-   - If there are more than one request validation errors, all errors are passed in one response as array
-   - Deletes the task if taskID passed is valid and present
-
-6. **GET /tasks/priority/:level**
-
-   Retrive all the tasks with the given priority level
-
-   - Validates if the priority level passed in the request is valid or not
-   - If there are more than one request validation errors, all errors are passed in one response as array
-   - Pass all tasks with same priority based on request param in the response
+| Endpoint                          | Description                                                           | Request Validation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Additional Details                                                                                |
+| --------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| **GET /v1/tasks**                 | Retrieve a list of all created tasks.                                 | - Filter and sort tasks based on criteria.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                   |
+| **POST /v1/tasks**                | Create a new task with a title and description.                       | - Ensure that the description is required, not empty, and is a string. <br> - Ensure that the title is required, not empty, and is a string. <br> - If multiple request validation errors occur, they are returned as an array.                                                                                                                                                                                                                                                                                                   | Create a new task with a title, description, unique ID, and set the `isComplete` flag to `false`. |
+| **GET /v1/tasks/:taskID**         | Get information related to a specific task identified by `taskID`.    | - Validate if the `taskID` provided is a valid number. <br> - Validate if the `taskID` exists among the list of tasks. <br> - If multiple request validation errors occur, they are returned as an array.                                                                                                                                                                                                                                                                                                                         | Return task details if the `taskID` is valid and exists.                                          |
+| **PUT /v1/tasks/:taskID**         | Update information related to a specific task identified by `taskID`. | - Validate if the `taskID` provided is a valid number. <br> - Validate if the `taskID` exists among the list of tasks. <br> - Validate optional description, ensuring it's not empty and is a string. <br> - Validate optional title, ensuring it's not empty and is a string. <br> - Validate optional `isComplete`, ensuring it's a boolean. <br> - Validate optional priority, ensuring it's a string and one of ['low', 'medium', 'high']. <br> - If multiple request validation errors occur, they are returned as an array. | Update the task information if the `taskID` is valid and exists.                                  |
+| **DELETE /v1/tasks/:taskID**      | Delete information related to a specific task identified by `taskID`. | - Validate if the `taskID` provided is a valid number. <br> - Validate if the `taskID` exists among the list of tasks. <br> - If multiple request validation errors occur, they are returned as an array.                                                                                                                                                                                                                                                                                                                         | Delete the task if the `taskID` is valid and exists.                                              |
+| **GET /v1/tasks/priority/:level** | Retrieve all tasks with the specified priority level.                 | - Validate if the priority level provided in the request is valid. <br> - If multiple request validation errors occur, they are returned as an array.                                                                                                                                                                                                                                                                                                                                                                             | Return all tasks with the same priority level based on the request parameter.                     |
 
 ## References:
 
-project structue : https://blog.logrocket.com/organizing-express-js-project-structure-better-productivity/
+## Express.js Project Structure
 
-Cors : https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express
+**Reference**: [Organizing Express.js Project Structure for Better Productivity](https://blog.logrocket.com/organizing-express-js-project-structure-better-productivity/)
 
-bodyParser: https://stackoverflow.com/a/39872729/11652193
+This article offers insights into structuring your Express.js project for improved productivity. It provides guidelines for organizing your codebase effectively.
 
-morgan: https://www.npmjs.com/package/morgan
+## CORS (Cross-Origin Resource Sharing)
+
+**Reference**: [How to Use CORS in Node.js with Express](https://www.section.io/engineering-education/how-to-use-cors-in-nodejs-with-express)
+
+Learn how to implement Cross-Origin Resource Sharing (CORS) in your Node.js application using Express. This resource explains the importance of CORS and provides step-by-step instructions for configuration.
+
+## Body Parser Middleware
+
+**Reference**: [Stack Overflow Answer on Body Parser](https://stackoverflow.com/a/39872729/11652193)
+
+This Stack Overflow answer offers a concise explanation of the Body Parser middleware in Node.js. It's a helpful resource for understanding how to parse incoming request bodies in your Express application.
+
+## Morgan Logger
+
+**Reference**: [Morgan - HTTP Request Logger](https://www.npmjs.com/package/morgan)
+
+Morgan is a widely used Node.js package for logging HTTP requests. This official npm page provides documentation and usage examples. It's a valuable tool for tracking and analyzing incoming requests in your Express app.
 
 [Node.js]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
 [Node-url]: https://nodejs.org/en

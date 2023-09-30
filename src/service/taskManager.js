@@ -1,5 +1,5 @@
-const { taskNotFound } = require('../errors/apiError');
-const { PRIORITY_LOW } = require('../constants/priority');
+const { taskNotFound } = require('@errors/apiError');
+const { PRIORITY_LOW } = require('@constants/priority');
 const _ = require('lodash');
 
 let idCounter = 1;

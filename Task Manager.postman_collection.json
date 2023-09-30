@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "439e7e3f-b13e-4350-98af-7ad9595415e2",
+		"_postman_id": "552e4bdc-9e59-49ad-aa5b-320cd7bd5674",
 		"name": "Task Manager",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11483599"
 	},
 	"item": [
 		{
@@ -14,12 +15,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks",
+							"raw": "localhost:3000/v1/tasks",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks"
 							]
 						}
@@ -37,12 +39,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/1",
+							"raw": "localhost:3000/v1/tasks/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1"
 							]
@@ -56,12 +59,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/INVALID",
+							"raw": "localhost:3000/v1/tasks/INVALID",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"INVALID"
 							]
@@ -75,12 +79,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/1000000",
+							"raw": "localhost:3000/v1/tasks/1000000",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1000000"
 							]
@@ -111,12 +116,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3000/tasks",
+									"raw": "localhost:3000/v1/tasks",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
+										"v1",
 										"tasks"
 									]
 								}
@@ -138,12 +144,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3000/tasks",
+									"raw": "localhost:3000/v1/tasks",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
+										"v1",
 										"tasks"
 									]
 								}
@@ -165,12 +172,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3000/tasks",
+									"raw": "localhost:3000/v1/tasks",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
+										"v1",
 										"tasks"
 									]
 								}
@@ -197,12 +205,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3000/tasks",
+									"raw": "localhost:3000/v1/tasks",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
+										"v1",
 										"tasks"
 									]
 								}
@@ -224,12 +233,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3000/tasks",
+									"raw": "localhost:3000/v1/tasks",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
+										"v1",
 										"tasks"
 									]
 								}
@@ -251,12 +261,13 @@
 									}
 								},
 								"url": {
-									"raw": "localhost:3000/tasks",
+									"raw": "localhost:3000/v1/tasks",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
+										"v1",
 										"tasks"
 									]
 								}
@@ -285,12 +296,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/1",
+							"raw": "localhost:3000/v1/tasks/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1"
 							]
@@ -313,12 +325,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/1",
+							"raw": "localhost:3000/v1/tasks/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1"
 							]
@@ -341,12 +354,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/1",
+							"raw": "localhost:3000/v1/tasks/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1"
 							]
@@ -369,12 +383,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/1",
+							"raw": "localhost:3000/v1/tasks/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1"
 							]
@@ -397,12 +412,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/INVALID",
+							"raw": "localhost:3000/v1/tasks/INVALID",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"INVALID"
 							]
@@ -425,12 +441,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/10000",
+							"raw": "localhost:3000/v1/tasks/10000",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"10000"
 							]
@@ -449,12 +466,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/1",
+							"raw": "localhost:3000/v1/tasks/1",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1"
 							]
@@ -468,12 +486,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/INVALID",
+							"raw": "localhost:3000/v1/tasks/INVALID",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"INVALID"
 							]
@@ -487,14 +506,62 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/1000000",
+							"raw": "localhost:3000/v1/tasks/1000000",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
+								"v1",
 								"tasks",
 								"1000000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get tasks based on priority",
+			"item": [
+				{
+					"name": "low",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/v1/tasks/priority/low",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"tasks",
+								"priority",
+								"low"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid priority",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/v1/tasks/priority/lower",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"v1",
+								"tasks",
+								"priority",
+								"lower"
 							]
 						}
 					},
@@ -517,12 +584,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/tasks",
+					"raw": "localhost:3000/v1/tasks",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
+						"v1",
 						"tasks"
 					]
 				}
